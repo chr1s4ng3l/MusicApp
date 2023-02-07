@@ -3,10 +3,11 @@ package com.example.musicapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.musicapp.R
 import com.example.musicapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.Classic -> replaceFragment(ClassicFragment())
                 R.id.Pop -> replaceFragment(PopFragment())
                 R.id.Rock -> replaceFragment(RockFragment())
-
             }
             true
         }

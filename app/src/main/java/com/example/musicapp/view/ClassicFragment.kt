@@ -5,9 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.musicapp.R
+import androidx.fragment.app.activityViewModels
+import com.example.musicapp.databinding.FragmentClassicBinding
+import com.example.musicapp.viewModel.MusicViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ClassicFragment : Fragment() {
+
+    private val binding by lazy {
+        FragmentClassicBinding.inflate(layoutInflater)
+    }
+
+    private val musicViewModel: MusicViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +30,19 @@ class ClassicFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classic, container, false)
+    ): View {
+
+
+        musicViewModel.getAllClassic()
+
+        musicViewModel.classicItems.observe(viewLifecycleOwner){
+            println(it?.artistName)
+        }
+
+
+
+        return binding.root
+
     }
 
 

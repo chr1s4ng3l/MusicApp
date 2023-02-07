@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="BabyBlue">#BFD7ED</color>
+    <color name="BlueGrotto">#60A3D9</color>
+    <color name="RoyalBlue">#0074B7</color>
+    <color name="NavyBlue">#003B73</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Lime_green">#18A558</color>
+    <color name="Orange">#ff9900</color>
+</resources>

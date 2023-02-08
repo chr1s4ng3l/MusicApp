@@ -2,4 +2,8 @@
     <string name="app_name">Music App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello fragmemt</string>
+    <string name="genre_image">Genre_image</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="the_beatles_album">The beatles album</string>
+    <string name="_5_50_usd">$5.50 USD</string>
 </resources>

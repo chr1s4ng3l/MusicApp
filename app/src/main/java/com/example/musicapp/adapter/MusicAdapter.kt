@@ -1,6 +1,7 @@
 package com.example.musicapp.adapter
 
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -14,6 +15,6 @@ class MusicAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+     println("")
     }
 }

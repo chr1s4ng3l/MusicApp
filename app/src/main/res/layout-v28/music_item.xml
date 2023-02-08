@@ -6,7 +6,8 @@
     android:layout_margin="10dp"
     android:padding="5dp"
     android:elevation="10dp"
-    app:cardCornerRadius="7dp">
+    app:cardCornerRadius="7dp"
+    android:outlineAmbientShadowColor="@color/black">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

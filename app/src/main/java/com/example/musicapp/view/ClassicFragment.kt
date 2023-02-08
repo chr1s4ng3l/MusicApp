@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.musicapp.databinding.FragmentClassicBinding
+import com.example.musicapp.databinding.FragmentViewBinding
 import com.example.musicapp.viewModel.MusicViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ClassicFragment : Fragment() {
 
     private val binding by lazy {
-        FragmentClassicBinding.inflate(layoutInflater)
+        FragmentViewBinding.inflate(layoutInflater)
     }
 
     private val musicViewModel: MusicViewModel by activityViewModels()

@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.musicapp.R
 import com.example.musicapp.databinding.FragmentViewBinding
+import com.example.musicapp.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RockFragment : Fragment() {
+class RockFragment : BaseFragment() {
 
     private val binding by lazy {
         FragmentViewBinding.inflate(layoutInflater)

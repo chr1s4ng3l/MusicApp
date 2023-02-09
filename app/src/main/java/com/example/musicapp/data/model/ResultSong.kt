@@ -16,4 +16,5 @@ data class ResultSong(
     val trackPrice: Double? = null,
     @SerializedName("previewUrl")
     val previewUrl: String? = null
+
 )

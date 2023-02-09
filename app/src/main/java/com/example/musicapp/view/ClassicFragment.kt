@@ -32,7 +32,6 @@ class ClassicFragment : BaseFragment() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,19 +58,19 @@ class ClassicFragment : BaseFragment() {
                     is UIState.LOADING -> {}
                     is UIState.SUCCESS<MusicItems> -> {
                         Log.d(TAG, "onCreateView: ${state.response}")
-                        musicAdapter.updateItems(state.response.results ?: emptyList())
+                        musicAdapter.updateItems(state.response.results ?: emptyList(), context)
                     }
                     is UIState.ERROR -> {
-                        showError(state.error.localizedMessage) {
+                        state.error.localizedMessage?.let {
+                            showError(it) {
 
+                            }
                         }
                     }
                 }
             }
 
-
             return binding.root
-
         }
 
 

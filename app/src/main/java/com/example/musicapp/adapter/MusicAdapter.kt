@@ -1,6 +1,8 @@
 package com.example.musicapp.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +12,8 @@ import com.example.musicapp.databinding.FragmentViewBinding
 import com.example.musicapp.databinding.MusicItemBinding
 import com.squareup.picasso.Picasso
 
+private const val TAG = "MusicAdapter"
+
 class MusicAdapter(
     private val itemSet: MutableList<ResultSong> = mutableListOf(),
     private val onItemClick: (previewUrl: String) -> Unit
@@ -17,10 +21,12 @@ class MusicAdapter(
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(newItems: List<ResultSong>) {
+    fun updateItems(newItems: List<ResultSong>, context: Context) {
         if (itemSet != newItems) {
             itemSet.clear()
             itemSet.addAll(newItems)
+
+            Toast.makeText(context, "Found ${newItems.count()} Results", Toast.LENGTH_SHORT).show()
 
             notifyDataSetChanged()
         }
@@ -42,22 +48,31 @@ class MusicAdapter(
     override fun getItemCount(): Int = itemSet.size
 
 
-    class SongViewHolder(private val binding: MusicItemBinding) :
+    class SongViewHolder(
+        private val binding: MusicItemBinding
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
+
+        //Binding the view in the cardView
         fun bind(item: ResultSong, onItemClick: (String) -> Unit) {
 
+            binding.tvArtistName.text = item.artistName.toString()
+            binding.tvCollection.text = item.collectionName.toString()
+            if (item.trackPrice != null) {
+                binding.tvPrice.text = "$${item.trackPrice} USD"
+            } else {
+                binding.tvPrice.text = "Free"
+            }
             Picasso.get().load(item.artworkUrl60).into(binding.imageViewGenre)
-            binding.tvArtistName?.text  = item.artistName
-            binding.tvCollection?.text = item.collectionName
-            binding.tvPrice?.text = "$${item.trackPrice.toString()} USD"
 
 
+            //Click on the item an play the review in Exoplayer
             itemView.setOnClickListener {
                 item.previewUrl?.let(onItemClick)
             }
         }
+
 
     }
 }

@@ -13,8 +13,6 @@ interface MusicApiClient {
      */
     @GET(PATH)
     suspend fun getAllSongs(@Query("term") sogGenre:GenreEnum): Response<MusicItems>
-
-
     companion object {
         //https://itunes.apple.com/
 

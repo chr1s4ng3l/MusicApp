@@ -9,21 +9,39 @@
         android:id="@+id/Classic"
         tools:layout="@layout/fragment_view"
         android:name="com.example.musicapp.view.ClassicFragment"
-        android:label="Classic Music"/>
+        android:label="Classic Music">
+        <action
+            android:id="@+id/action_Classic_to_PlayFragment"
+            app:destination="@id/PlayFragment" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/Pop"
         tools:layout="@layout/fragment_view"
         android:name="com.example.musicapp.view.PopFragment"
-        android:label="Classic Music"/>
+        android:label="Classic Music">
+        <action
+            android:id="@+id/action_Pop_to_PlayFragment"
+            app:destination="@id/PlayFragment" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/Rock"
         tools:layout="@layout/fragment_view"
         android:name="com.example.musicapp.view.RockFragment"
-        android:label="Classic Music"/>
+        android:label="Classic Music">
+        <action
+            android:id="@+id/action_Rock_to_PlayFragment"
+            app:destination="@id/PlayFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PlayFragment"
+        tools:layout="@layout/fragment_play"
+        android:name="com.example.musicapp.view.PlayFragment"
+        android:label="Track review"/>
 
 
 </navigation>

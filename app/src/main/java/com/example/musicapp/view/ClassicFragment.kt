@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musicapp.R
 import com.example.musicapp.adapter.MusicAdapter
 import com.example.musicapp.data.model.MusicItems
 import com.example.musicapp.databinding.FragmentViewBinding
@@ -28,6 +30,8 @@ class ClassicFragment : BaseFragment() {
 
     private val musicAdapter by lazy {
         MusicAdapter {
+            findNavController().navigate(R.id.action_Classic_to_PlayFragment)
+            musicViewModel.urlTrack = it
             Toast.makeText(parentFragment?.context, "URL: $it", Toast.LENGTH_LONG).show()
         }
     }

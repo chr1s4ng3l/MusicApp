@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicapp.R
 import com.example.musicapp.adapter.MusicAdapter
@@ -27,7 +28,8 @@ class PopFragment : BaseFragment() {
 
     private val musicAdapter by lazy {
         MusicAdapter {
-            Toast.makeText(parentFragment?.context, "URL: $it", Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_Classic_to_PlayFragment)
+           musicViewModel.urlTrack = it
         }
     }
 

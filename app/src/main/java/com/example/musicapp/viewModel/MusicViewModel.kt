@@ -22,8 +22,7 @@ class MusicViewModel @Inject constructor(
     private val musicRepository: MusicRepositoryImplementation,
 ) : ViewModel() {
 
-
-
+   var urlTrack = ""
     private val genres = GenreEnum.values()
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val _classic: MutableLiveData<UIState<MusicItems>> = MutableLiveData(UIState.LOADING)

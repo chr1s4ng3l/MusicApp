@@ -6,16 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:keepScreenOn="true">
+    >
 
 
     <com.google.android.exoplayer2.ui.StyledPlayerView
         android:id="@+id/playerView"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:show_subtitle_button="true"
+        android:layout_marginTop="130dp"
         app:bar_gravity="center"
+        app:default_artwork="@drawable/apple_music"
         argType:fastforward_increment="15000"
         argType:resize_mode="fixed_width"
         argType:rewind_increment="15000"
@@ -25,6 +26,7 @@
         argType:show_previous_button="false"
         argType:show_rewind_button="true"
         argType:show_subtitle_button="true"
+        app:hide_on_touch="true"
         app:auto_show="true"
         app:keep_content_on_player_reset="true"
         argType:use_artwork="true"

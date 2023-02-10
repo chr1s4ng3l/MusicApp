@@ -5,15 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import com.example.musicapp.databinding.FragmentPlayBinding
 import com.example.musicapp.viewModel.MusicViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.dash.DashMediaSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-
 
 class PlayFragment : Fragment() {
 
@@ -27,7 +23,6 @@ class PlayFragment : Fragment() {
     private var uriTrack = ""
     private var exoPlayer: ExoPlayer? = null
     private var playBackPosition = 0L
-    private var currentWindow = 0
     private var playWhenReady = true
 
 
@@ -63,6 +58,7 @@ class PlayFragment : Fragment() {
             exoPlayer?.setMediaItem(mediaItem)
             exoPlayer?.seekTo(playBackPosition)
             exoPlayer?.playWhenReady = playWhenReady
+
             exoPlayer?.prepare()
         } catch (e: java.lang.Exception) {
             e.message
@@ -70,7 +66,7 @@ class PlayFragment : Fragment() {
 
     }
 
-
+    //Stop exoplayer buffering
     private fun releaseExoPlayer() {
         exoPlayer?.let {
             playBackPosition = it.currentPosition
@@ -93,11 +89,6 @@ class PlayFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         releaseExoPlayer()
-    }
-
-    companion object {
-        const val URL =
-            "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"
     }
 
 

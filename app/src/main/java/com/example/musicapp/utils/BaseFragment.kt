@@ -20,6 +20,7 @@ open class BaseFragment : Fragment() {
     }
 
     protected fun showError(message: String, action: () -> Unit) {
+        musicViewModel.isLoading.postValue(false)
         AlertDialog.Builder(requireActivity())
             .setTitle("Error Occurred")
             .setMessage(message)

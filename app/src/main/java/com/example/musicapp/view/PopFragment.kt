@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicapp.R
@@ -28,6 +29,7 @@ class PopFragment : BaseFragment() {
 
     private val musicAdapter by lazy {
         MusicAdapter {
+            //Send the urlTrack
             musicViewModel.urlTrack = it
             findNavController().navigate(R.id.action_Pop_to_PlayFragment)
         }
@@ -44,6 +46,15 @@ class PopFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //Swipe Refresh
+        binding.swipeRefresh.setOnRefreshListener {
+            musicViewModel.isLoading.postValue(false)
+            getSongsPop()
+            binding.swipeRefresh.isRefreshing = false
+        }
+
+        //RecyclerView
         binding.musicRv.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -53,26 +64,42 @@ class PopFragment : BaseFragment() {
 
             adapter = musicAdapter
 
-            //ViewModel here
-            musicViewModel.pop.observe(viewLifecycleOwner) { state ->
-                when (state) {
-                    is UIState.LOADING -> {}
-                    is UIState.SUCCESS<MusicItems> -> {
-                        Log.d(TAG, "onCreateView: ${state.response}")
-                        musicAdapter.updateItems(state.response.results ?: emptyList(), context)
-                    }
-                    is UIState.ERROR -> {
-                        state.error.localizedMessage?.let {
-                            showError(it) {
+            getSongsPop()
 
-                            }
-                        }
-                    }
-                }
+
+            musicViewModel.isLoading.observe(viewLifecycleOwner) {
+                binding.progress.isVisible = it
             }
 
             return binding.root
 
+        }
+    }
+
+    private fun getSongsPop() {
+        //ViewModel here
+        musicViewModel.pop.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.LOADING -> {
+                    musicViewModel.isLoading.postValue(true)
+                }
+                is UIState.SUCCESS<MusicItems> -> {
+                    musicViewModel.isLoading.postValue(false)
+                    Log.d(TAG, "onCreateView: ${state.response}")
+                    musicAdapter.updateItems(
+                        state.response.results ?: emptyList(),
+                        requireContext()
+                    )
+                }
+                is UIState.ERROR -> {
+                    musicViewModel.isLoading.postValue(false)
+                    state.error.localizedMessage?.let {
+                        showError(it) {
+
+                        }
+                    }
+                }
+            }
         }
     }
 }

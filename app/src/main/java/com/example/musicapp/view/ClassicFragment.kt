@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +50,16 @@ class ClassicFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        //Swipe Refresh
+        binding.swipeRefresh.setOnRefreshListener {
+            musicViewModel.isLoading.postValue(false)
+            getSongsClassic()
+            binding.swipeRefresh.isRefreshing = false
+        }
+
         binding.musicRv.apply {
+            //RecyclerView
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,
@@ -58,27 +68,41 @@ class ClassicFragment : BaseFragment() {
 
             adapter = musicAdapter
 
-            //ViewModel here
-            musicViewModel.classic.observe(viewLifecycleOwner) { state ->
-                when (state) {
-                    is UIState.LOADING -> {}
-                    is UIState.SUCCESS<MusicItems> -> {
-                        Log.d(TAG, "onCreateView: ${state.response}")
-                        musicAdapter.updateItems(state.response.results ?: emptyList(), context)
-                    }
-                    is UIState.ERROR -> {
-                        state.error.localizedMessage?.let {
-                            showError(it) {
+            getSongsClassic()
 
-                            }
-                        }
-                    }
-                }
+            musicViewModel.isLoading.observe(viewLifecycleOwner){
+                binding.progress.isVisible = it
             }
 
             return binding.root
         }
 
 
+
+    }
+
+
+    private fun getSongsClassic(){
+        //ViewModel here
+        musicViewModel.classic.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.LOADING -> {
+                    musicViewModel.isLoading.postValue(true)
+                }
+                is UIState.SUCCESS<MusicItems> -> {
+                    musicViewModel.isLoading.postValue(false)
+                    Log.d(TAG, "onCreateView: ${state.response}")
+                    musicAdapter.updateItems(state.response.results ?: emptyList(), requireContext())
+                }
+                is UIState.ERROR -> {
+                    musicViewModel.isLoading.postValue(false)
+                    state.error.localizedMessage?.let {
+                        showError(it) {
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }

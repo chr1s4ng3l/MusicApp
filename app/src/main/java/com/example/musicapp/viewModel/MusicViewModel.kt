@@ -32,12 +32,15 @@ class MusicViewModel @Inject constructor(
     private val _pop: MutableLiveData<UIState<MusicItems>> = MutableLiveData(UIState.LOADING)
     val pop: MutableLiveData<UIState<MusicItems>> get() = _pop
 
+    var isLoading = MutableLiveData<Boolean>()
+
 
     init {
         getAllSongs()
     }
 
     private fun getAllSongs() {
+        isLoading.postValue(true)
         genres.forEach { g ->
             run {
                 viewModelScope.launch(ioDispatcher) {

@@ -28,8 +28,8 @@ class PopFragment : BaseFragment() {
 
     private val musicAdapter by lazy {
         MusicAdapter {
-            findNavController().navigate(R.id.action_Classic_to_PlayFragment)
-           musicViewModel.urlTrack = it
+            musicViewModel.urlTrack = it
+            findNavController().navigate(R.id.action_Pop_to_PlayFragment)
         }
     }
 

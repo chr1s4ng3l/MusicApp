@@ -30,9 +30,11 @@ class ClassicFragment : BaseFragment() {
 
     private val musicAdapter by lazy {
         MusicAdapter {
-            findNavController().navigate(R.id.action_Classic_to_PlayFragment)
             musicViewModel.urlTrack = it
-            Toast.makeText(parentFragment?.context, "URL: $it", Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_Classic_to_PlayFragment)
+
+            println("Url: $it")
+            //Toast.makeText(parentFragment?.context, "URL: $it", Toast.LENGTH_LONG).show()
         }
     }
 

@@ -1,8 +1,12 @@
 package com.example.musicapp.data.network
 
 import android.util.Log
+import com.example.musicapp.data.database.dao.MusicDao
+import com.example.musicapp.data.database.entities.MusicEntity
 import com.example.musicapp.data.model.GenreEnum
 import com.example.musicapp.data.model.MusicItems
+import com.example.musicapp.domain.model.Song
+import com.example.musicapp.domain.model.toDomain
 import com.example.musicapp.utils.FailResponse
 import com.example.musicapp.utils.NullResponse
 import com.example.musicapp.utils.UIState
@@ -18,8 +22,9 @@ interface MusicRepository {
 
 class MusicRepositoryImplementation @Inject constructor(
     private val api: MusicApiClient,
+    private val musicDao: MusicDao
 
-    ) : MusicRepository {
+) : MusicRepository {
     override fun getListByType(genre: GenreEnum): Flow<UIState<MusicItems>> = flow {
         emit(UIState.LOADING)
         try {
@@ -35,6 +40,13 @@ class MusicRepositoryImplementation @Inject constructor(
             Log.e(TAG, "getListByGenre: $e")
             emit(UIState.ERROR(e))
         }
+    }
+
+    suspend fun getListByTypeFromDatabase(): List<Song> {
+
+        val response: List<MusicEntity> = musicDao.getAllSongs()
+        return response.map { it.toDomain() }
+
     }
 }
 

@@ -44,9 +44,7 @@ class MusicAdapter(
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) =
         holder.bind(itemSet[position], onItemClick)
 
-
     override fun getItemCount(): Int = itemSet.size
-
 
     class SongViewHolder(
         private val binding: MusicItemBinding
@@ -65,7 +63,6 @@ class MusicAdapter(
                 binding.tvPrice.text = "Free"
             }
             Picasso.get().load(item.artworkUrl60).into(binding.imageViewGenre)
-
 
             //Click on the item an play the review in Exoplayer
             itemView.setOnClickListener {

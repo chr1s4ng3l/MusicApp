@@ -41,7 +41,8 @@
         android:id="@+id/PlayFragment"
         tools:layout="@layout/fragment_play"
         android:name="com.example.musicapp.view.PlayFragment"
-        android:label="Track review"/>
+        android:label="Track review"
+        />
 
 
 </navigation>

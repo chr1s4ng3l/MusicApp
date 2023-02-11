@@ -9,12 +9,13 @@ import com.example.musicapp.data.database.entities.MusicEntity
 @Dao
 interface MusicDao {
 
-    @Query("SELECT * FROM music_table ORDER BY name DESC")
-    suspend fun getAllQuotes(): List<MusicEntity>
+    //All querys here
+    @Query("SELECT * FROM music_table ORDER BY artistName DESC")
+    suspend fun getAllSongs(): List<MusicEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(quotes: List<MusicEntity>)
+    suspend fun insertAll(song: List<MusicEntity>)
 
     @Query("DELETE FROM music_table")
-    suspend fun deleteAllQuotes()
+    suspend fun deleteAllSongs()
 }

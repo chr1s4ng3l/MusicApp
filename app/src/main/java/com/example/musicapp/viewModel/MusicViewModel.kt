@@ -5,13 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.musicapp.data.model.GenreEnum
 import com.example.musicapp.data.model.MusicItems
-import com.example.musicapp.data.network.MusicRepository
 import com.example.musicapp.data.network.MusicRepositoryImplementation
 import com.example.musicapp.utils.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

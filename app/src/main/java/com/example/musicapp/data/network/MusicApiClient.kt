@@ -12,7 +12,8 @@ interface MusicApiClient {
      * method to get the ROCK from server
      */
     @GET(PATH)
-    suspend fun getAllSongs(@Query("term") sogGenre:GenreEnum): Response<MusicItems>
+    suspend fun getAllSongs(@Query("term") sogGenre: GenreEnum): Response<MusicItems>
+
     companion object {
         //https://itunes.apple.com/
 

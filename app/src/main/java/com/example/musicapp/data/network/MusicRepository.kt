@@ -18,8 +18,8 @@ private const val TAG = "MusicRepository"
 
 interface MusicRepository {
     fun getListByType(genre: GenreEnum): Flow<UIState<MusicItems>>
+    suspend fun getAllFromDatabase(genre: GenreEnum): List<Song>
 }
-
 class MusicRepositoryImplementation @Inject constructor(
     private val api: MusicApiClient,
     private val musicDao: MusicDao
@@ -42,12 +42,19 @@ class MusicRepositoryImplementation @Inject constructor(
         }
     }
 
-    suspend fun getListByTypeFromDatabase(): List<Song> {
-
+    override suspend fun getAllFromDatabase(genre: GenreEnum): List<Song> {
         val response: List<MusicEntity> = musicDao.getAllSongs()
-        return response.map { it.toDomain() }
-
+        return response.map {it.toDomain()}
     }
+
+    suspend fun insertQuotes(song: List<MusicEntity>){
+        musicDao.insertAll(song)
+    }
+
+    suspend fun clearQuotes(){
+        musicDao.deleteAllSongs()
+    }
+
 }
 
 

@@ -2,7 +2,6 @@ package com.example.musicapp.domain.model
 
 import com.example.musicapp.data.database.entities.MusicEntity
 import com.example.musicapp.data.model.ResultSong
-import com.google.gson.annotations.SerializedName
 
 data class Song(
     val artistName: String,

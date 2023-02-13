@@ -11,10 +11,4 @@ class GetSongUseCase @Inject constructor(
     private val genreEnum: GenreEnum
 ) {
 
-//    suspend operator fun invoke(): List<Song> {
-//
-//        val songs = musicRepository.getListByType(genreEnum)
-//
-//
-//    }
 }

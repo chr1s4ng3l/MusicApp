@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.musicapp.data.database.entities.MusicEntity
+import com.example.musicapp.domain.model.Song
 
 @Dao
 interface MusicDao {

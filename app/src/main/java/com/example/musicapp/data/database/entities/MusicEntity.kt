@@ -3,7 +3,8 @@ package com.example.musicapp.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import com.example.musicapp.data.model.ResultSong
+import com.example.musicapp.domain.model.Song
 
 @Entity(tableName = "music_table")
 data class MusicEntity(
@@ -16,5 +17,15 @@ data class MusicEntity(
     @ColumnInfo(name = "trackPrice") val trackPrice: Double,
     @ColumnInfo(name = "previewUrl") val previewUrl: String
 )
+
+fun Song.toDatabase() = MusicEntity(
+    artistName = artistName,
+    artworkUrl60 = artworkUrl60,
+    collectionName = collectionName,
+    trackName = trackName,
+    trackPrice = trackPrice,
+    previewUrl = previewUrl
+)
+
 
 

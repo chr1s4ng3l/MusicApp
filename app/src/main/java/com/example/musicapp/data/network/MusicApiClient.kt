@@ -2,6 +2,7 @@ package com.example.musicapp.data.network
 
 import com.example.musicapp.data.model.GenreEnum
 import com.example.musicapp.data.model.MusicItems
+import com.example.musicapp.data.model.MusicResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
